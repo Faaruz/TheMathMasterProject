@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-
+/**
+ * Unused code for now.
+ * Use for database testing
+ */
 public class SQLController {
 
     public static void main(String[] args) {
