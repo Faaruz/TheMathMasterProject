@@ -4,7 +4,7 @@ First year project at The Hague University of Applied Sciences
 
 ## Libraries / Applications used
 
-#### These libraries are for basic components built The Math Master:
+#### Libaries and Programs used to built The Math Master:
 * [OpenJFX](https://download2.gluonhq.com/openjfx/19/openjfx-19_windows-x64_bin-sdk.zip)
 * [mysql-connector](https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-j-8.0.31.zip)
 * [SceneBuilder](https://download2.gluonhq.com/scenebuilder/19.0.0/install/win/SceneBuilder-19.0.0.msi)
