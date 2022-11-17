@@ -1,4 +1,4 @@
-package sample;
+package TheMathMaster;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

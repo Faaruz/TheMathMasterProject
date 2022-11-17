@@ -1,4 +1,4 @@
-package sample;
+package TheMathMaster;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
