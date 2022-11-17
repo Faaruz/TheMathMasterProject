@@ -15,13 +15,12 @@ import javafx.stage.Stage;
 import java.sql.*;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Objects;
 
 public class Controller {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-
 
     @FXML
     private AnchorPane anchor;
@@ -42,24 +41,21 @@ public class Controller {
     private Label lSignInError;
 
     @FXML
-    void btnSignIn(ActionEvent event) throws IOException {
+    void btnSignIn(ActionEvent event) {
 
         /**
          * Verify username and password with database on button click SignIn
          */
         try{
-            Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mathmasterdb", "root", "Math123");
-
             String username = tfUsername.getText();
             String password = tfPassword.getText();
-
             Statement statement = connection.createStatement();
             String sql = "select * from login where username='"+username+"' and password='"+password+"'";
             ResultSet resultSet = statement.executeQuery(sql);
 
             if(resultSet.next()){
-                Parent root = FXMLLoader.load(getClass().getResource("sampleSignIn.fxml"));
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("controlPanel.fxml")));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -83,7 +79,7 @@ public class Controller {
      */
     @FXML
     void btnSignOut(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("signIn.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
