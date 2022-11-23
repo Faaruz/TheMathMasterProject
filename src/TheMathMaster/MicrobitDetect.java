@@ -15,17 +15,31 @@ public class MicrobitDetect {
     }
 
     public static void waitForNotifying() {
-        if (File.listRoots().length > oldListRoot.length) {
-            System.out.println("new drive detected");
-            oldListRoot = File.listRoots();
-            System.out.println("drive"+oldListRoot[oldListRoot.length-1]+" detected");
-            drive = true;
-            System.out.println(returnExampleBool());
-        } else if (File.listRoots().length < oldListRoot.length) {
-            System.out.println(oldListRoot[oldListRoot.length-1]+" drive removed");
-            drive = false;
-            System.out.println(returnExampleBool());
-            oldListRoot = File.listRoots();
-        }
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (File.listRoots().length > oldListRoot.length) {
+                        System.out.println("new drive detected");
+                        oldListRoot = File.listRoots();
+                        System.out.println("drive"+oldListRoot[oldListRoot.length-1]+" detected");
+                        drive = true;
+                        System.out.println(returnExampleBool());
+                        break;
+
+                    } else if (File.listRoots().length < oldListRoot.length) {
+                        System.out.println(oldListRoot[oldListRoot.length-1]+" drive removed");
+                        drive = false;
+                        System.out.println(returnExampleBool());
+                        oldListRoot = File.listRoots();
+                    }
+                }
+            }
+        });
+        t.start();
     }
 }

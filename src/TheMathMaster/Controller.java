@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -41,6 +42,10 @@ public class Controller {
     private Label lSignInError;
 
     @FXML
+    private TextArea taMicrobit;
+
+
+    @FXML
     void btnSignIn(ActionEvent event) {
 
         /**
@@ -51,11 +56,11 @@ public class Controller {
             String username = tfUsername.getText();
             String password = tfPassword.getText();
             Statement statement = connection.createStatement();
-            String sql = "select * from login where username='"+username+"' and password='"+password+"'";
+            String sql = "select * from account where username='"+username+"' and password='"+password+"'";
             ResultSet resultSet = statement.executeQuery(sql);
 
             if(resultSet.next()){
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("controlPanel.fxml")));
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("panels/controlPanel.fxml")));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -79,7 +84,7 @@ public class Controller {
      */
     @FXML
     void btnSignOut(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("signIn.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("panels/signIn.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -101,6 +106,27 @@ public class Controller {
         }
     }
 
+    @FXML
+    void btnSetupQuestions(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("panels/questionPanel.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    @FXML
+    void btnAdminPanel(ActionEvent event) throws  IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("panels/adminPanel.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+
     /**
      * Microbit connection, needs manual press on the button to check.
      * @param event
@@ -112,9 +138,9 @@ public class Controller {
         if (MicrobitDetect.returnExampleBool()) {
             lStatus.setTextFill(Color.web("#23eb00"));
             lStatus.setText("Connected");
+            taMicrobit.setText("test");
         } else {
             lStatus.setTextFill(Color.web("#ff0000"));
-            lStatus.setText("Disconnected");
         }
     }
 }
